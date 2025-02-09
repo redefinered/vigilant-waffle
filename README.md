@@ -5,7 +5,7 @@
 PORT=3000
 
 DB_USER=cchal_user
-DB_HOST=localhost
+DB_HOST=cchal-postgresql
 DB_NAME=cchal_db
 DB_PASS=cchalpassword
 DB_PORT=5432
