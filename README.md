@@ -14,7 +14,10 @@ DB_PORT=5432
 ## Deploy
 
 ### Install App Into k8s Cluster
-`helm install todo-app -n <your-namespace>`
+```console
+helm dependency update chart
+helm install todo-app -n <your-namespace>
+```
 
 ### Expose App to Host Machine
 
