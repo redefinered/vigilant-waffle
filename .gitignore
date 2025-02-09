@@ -34,6 +34,7 @@ Thumbs.db
 *.bak
 *.orig
 *.lock
+!chart/Chart.lock
 *.tmp
 *.backup
 *.swp
@@ -84,20 +85,13 @@ service-account.json
 
 # Docker
 docker-compose.override.yml
-docker-compose.yml
-.dockerignore
 .docker/
-Dockerfile
 Dockerfile.dev
 *.dockerfile
-docker-*
 
 # Kubernetes
 .kube/
-helm/
 helmfile/
-charts/
-values.yaml
 *.kubeconfig
 
 # Deployment

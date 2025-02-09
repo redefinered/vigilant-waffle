@@ -1,0 +1,39 @@
+version: "3.8"
+
+services:
+  postgres:
+    image: postgres:latest
+    container_name: postgres-db
+    restart: always
+    environment:
+      POSTGRES_USER: cchal_user
+      POSTGRES_PASSWORD: cchalpassword
+      POSTGRES_DB: cchal_db
+    volumes:
+      - ./backend/db-init.sql:/docker-entrypoint-initdb.d/db-init.sql
+    ports:
+      - "5432:5432"
+
+  backend:
+    build: ./backend
+    container_name: backend-app
+    restart: always
+    environment:
+      DB_USER: cchal_user
+      DB_HOST: postgres
+      DB_NAME: cchal_db
+      DB_PASS: cchalpassword
+      DB_PORT: 5432
+    depends_on:
+      - postgres
+    ports:
+      - "3000:3000"
+
+  frontend:
+    build: ./frontend
+    container_name: frontend-app
+    restart: always
+    depends_on:
+      - backend
+    ports:
+      - "3001:80"  # Nginx serves on port 3001
