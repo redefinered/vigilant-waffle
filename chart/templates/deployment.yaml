@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: {{ .Release.Name }}-backend
 spec:
-  replicas: 1
+  replicas: {{ .Values.replicaCount }}
   selector:
     matchLabels:
       app: backend
@@ -23,7 +23,11 @@ spec:
             - name: DB_USER
               value: "{{ .Values.backend.env.DB_USER }}"
             - name: DB_PASS
-              value: "{{ .Values.backend.env.DB_PASS }}"
+              # value: "{{ .Values.backend.env.DB_PASS }}"
+              valueFrom:
+                secretKeyRef:
+                  name: cchal-postgresql
+                  key: password
             - name: DB_NAME
               value: "{{ .Values.backend.env.DB_NAME }}"
             - name: DB_PORT
@@ -35,7 +39,7 @@ kind: Deployment
 metadata:
   name: {{ .Release.Name }}-frontend
 spec:
-  replicas: 1
+  replicas: {{ .Values.replicaCount }}
   selector:
     matchLabels:
       app: frontend
