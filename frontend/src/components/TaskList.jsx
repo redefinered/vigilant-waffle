@@ -3,15 +3,21 @@ import PropTypes from "prop-types";
 
 const TaskItem = ({ task, onComplete, onDelete }) => (
     <div className="task-item">
-        <input
-            type="checkbox"
-            checked={task.completed}
-            onChange={() => onComplete(task.id)}
-        />
-        <span style={{ textDecoration: task.completed ? "line-through" : "none" }}>
-            {task.name}
+        
+        <div>
+            <input
+                type="checkbox"
+                checked={task.completed}
+                onChange={() => onComplete(task.id)}
+            />
+            <span style={{ textDecoration: task.completed ? "line-through" : "none" }}>
+                {task.name}
+            </span>
+            <button onClick={() => onDelete(task.id)}>❌</button>
+        </div>
+        <span style={{ color: "gray", marginLeft: 28 }}>
+            {task.description}
         </span>
-        <button onClick={() => onDelete(task.id)}>❌</button>
     </div>
 );
 
@@ -64,6 +70,7 @@ TaskItem.propTypes = {
     task: PropTypes.shape({
         id: PropTypes.number.isRequired,
         name: PropTypes.string.isRequired,
+        description: PropTypes.string,
         completed: PropTypes.bool.isRequired,
     }).isRequired,
     onComplete: PropTypes.func.isRequired,
